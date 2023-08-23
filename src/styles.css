@@ -1,0 +1,45 @@
+.search-form {
+}
+.input {
+  margin-bottom: 30px;
+  border-radius: 20px;
+  padding: 8px;
+  margin-right: 5px;
+  width: 260px;
+}
+.btn-search {
+  border-radius: 20px;
+  padding: 8px;
+}
+.load-more {
+  position: absolute;
+  left: 45%;
+  bottom: 20px;
+  border-radius: 20px;
+  padding: 5px;
+}
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.photo-card {
+  margin-bottom: 20px;
+}
+
+.image {
+  border-radius: 20px;
+  width: 350;
+  height: 240;
+}
+.info {
+  padding: 5px, 4px, 10px;
+  display: flex;
+
+  width: 350;
+  gap: 30px;
+
+  border-bottom: 1px solid lightslategray;
+}
+.info-item {
+}
