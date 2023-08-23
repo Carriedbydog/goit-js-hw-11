@@ -15,13 +15,14 @@
   display: inline-block;
   margin-left: 50%;
   border-radius: 20px;
-  padding: 5px;
+  padding: 15px;
 }
 .gallery {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: space-evenly;
+  margin-bottom: 40px;
 }
 .photo-card {
   width: calc(400px - 40px);
