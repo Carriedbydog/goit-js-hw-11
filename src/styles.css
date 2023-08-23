@@ -12,31 +12,35 @@
   padding: 8px;
 }
 .load-more {
-  position: absolute;
-  left: 45%;
-  bottom: 20px;
+  display: inline-block;
+  margin-left: 50%;
   border-radius: 20px;
   padding: 5px;
 }
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: 20px;
+  justify-content: space-evenly;
 }
 .photo-card {
-  margin-bottom: 20px;
+  width: calc(400px - 40px);
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .image {
   border-radius: 20px;
-  width: 350;
+  width: 360;
   height: 240;
 }
 .info {
   padding: 5px, 4px, 10px;
   display: flex;
 
-  width: 350;
+  width: 360;
   gap: 30px;
 
   border-bottom: 1px solid lightslategray;
