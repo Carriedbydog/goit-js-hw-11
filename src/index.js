@@ -12,7 +12,6 @@ const refs = {
 
 const imageApi = new ImageApi();
 let maxPage = 1;
-refs.loadMoreBtn.disabled = true;
 let lightbox;
 refs.loadMoreBtn.classList.add('visually-hidden');
 // =======================================================================
@@ -29,28 +28,32 @@ async function onFormSubmit(e) {
     }
     imageApi.query = query;
     imageApi.page = 1;
+
     const data = await imageApi.getImages(query);
+    maxPage = Math.ceil(data.hits / imageApi.perPage);
+
     refs.loadMoreBtn.classList.remove('visually-hidden');
+    lightbox = new SimpleLightbox('.gallery a');
+
     if (data.total === 0) {
       e.target.reset();
       refs.loadMoreBtn.classList.add('visually-hidden');
       Notiflix.Notify.failure(
         'Sorry, there are no images matching your search query. Please try again.'
       );
-    } else if (data.total > 0) {
+    }
+    if (data.totalHits > 0) {
       Notiflix.Notify.success(`Hooray! We found ${data.totalHits} images`);
+      if (data.totalHits < 40) {
+        refs.loadMoreBtn.classList.add('visually-hidden');
+      } else {
+        refs.loadMoreBtn.classList.remove('visually-hidden');
+      }
     }
-    if (data.total <= 40) {
-      refs.loadMoreBtn.classList.add('visually-hidden');
-    }
-    maxPage = Math.ceil(data.hits / imageApi.perPage);
     refs.gallery.innerHTML = '';
     renderImages(data.hits);
 
-    lightbox = new SimpleLightbox('.gallery a');
     lightbox.refresh();
-
-    refs.loadMoreBtn.disabled = false;
     updateStatusBtn();
 
     e.target.reset();
@@ -64,7 +67,7 @@ async function onLoadMoreClick(e) {
   imageApi.page += 1;
   updateStatusBtn();
   try {
-    const data = await imageApi.getImages();
+    const data = await imageApi.getImages(imageApi.page);
     renderImages(data.hits);
     if (data.hits < 40) {
       refs.loadMoreBtn.classList.add('visually-hidden');
@@ -83,7 +86,7 @@ async function onLoadMoreClick(e) {
 
 function updateStatusBtn() {
   if (imageApi.page === maxPage) {
-    refs.loadMoreBtn.disabled = true;
+    refs.loadMoreBtn.classList.add('visually-hidden');
   }
 }
 
