@@ -21,12 +21,8 @@ export class ImageApi {
     });
 
     const url = `${BASE_URL}?${PARAMS}`;
-    const res = await axios(url).then(res => {
-      if (!res.ok) {
-        throw new Error('Error', res.statusText);
-      }
-      return res.json();
-    });
+    const res = await axios.get(url);
+    return res.data;
   }
   get perPage() {
     return this.#per_page;
