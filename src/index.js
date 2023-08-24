@@ -65,14 +65,15 @@ async function onLoadMoreClick(e) {
   try {
     const data = await imageApi.getImages();
     renderImages(data.hits);
-    if (data.total > 40) {
+    if (data.hits < 40) {
       refs.loadMoreBtn.classList.add('visually-hidden');
       Notiflix.Notify.failure(
         "We're sorry, but you've reached the end of search results."
       );
+    } else {
+      refs.loadMoreBtn.disabled = false;
     }
     lightbox.refresh();
-    refs.loadMoreBtn.disabled = false;
 
     updateStatusBtn();
   } catch (error) {
