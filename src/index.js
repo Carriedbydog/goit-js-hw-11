@@ -69,7 +69,7 @@ async function onLoadMoreClick(e) {
   try {
     const data = await imageApi.getImages(imageApi.page);
     renderImages(data.hits);
-    if (data.hits < 40) {
+    if (data.totalHits < 40 * imageApi.page) {
       refs.loadMoreBtn.classList.add('visually-hidden');
       Notiflix.Notify.failure(
         "We're sorry, but you've reached the end of search results."
