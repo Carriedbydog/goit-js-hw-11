@@ -62,6 +62,7 @@ async function onFormSubmit(e) {
 
 async function onLoadMoreClick(e) {
   imageApi.page += 1;
+  updateStatusBtn();
   try {
     const data = await imageApi.getImages();
     renderImages(data.hits);
@@ -71,11 +72,10 @@ async function onLoadMoreClick(e) {
         "We're sorry, but you've reached the end of search results."
       );
     } else {
-      refs.loadMoreBtn.disabled = false;
+      refs.loadMoreBtn.classList.remove('visually-hidden');
     }
-    lightbox.refresh();
 
-    updateStatusBtn();
+    lightbox.refresh();
   } catch (error) {
     console.log(error);
   }
